@@ -1,21 +1,14 @@
+%option noyywrap nodefault yylineno
 %{
-    // enum yytokentype{
-    //     NUMBER = 258,
-    //     ADD = 259,
-    //     SUB = 260,
-    //     MUL = 261,
-    //     DIV = 262,
-    //     EOL = 263
-    // };
-    // int yylval;
     #include "fb1.tab.h"
 %}
 
 %%
-"+" {printf("ADD\n");}
+"+" {printf("ADD;}
 "-" {printf("SUB\n");}
 "*" {printf("TIMES\n");}
 "/" {printf("DIVIDE\n");}
+
 [0-9]+ {printf("NUMBER %s\n",yytext);}
 \n { printf("NEWLINE\n");}
 [ \t] { }
