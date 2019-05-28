@@ -1,16 +1,18 @@
 %option noyywrap nodefault yylineno
 %{
     #include "fb1.tab.h"
+    // int yylval;
+
 %}
 
 %%
-"+" {printf("ADD");}
-"-" {printf("SUB\n");}
-"*" {printf("TIMES\n");}
-"/" {printf("DIVIDE\n");}
+"+" {printf("ADD\n");return ADD;}
+"-" {printf("SUB\n");return SUB;}
+"*" {printf("TIMES\n");return MUL;}
+"/" {printf("DIVIDE\n");return DIV;}
 
-[0-9]+ {printf("NUMBER %s\n",yytext);}
-\n { printf("NEWLINE\n");}
+[0-9]+ {printf("NUMBER %s\n",yytext);yylval = atoi(yytext);return NUMBER;}
+\n { printf("NEWLINE\n");return EOL;}
 [ \t] { }
 . { printf("Undifined character %s\n",yytext);}
 %%

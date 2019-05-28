@@ -89,6 +89,7 @@
 #line 1 "fb1.y"
 
 #include <stdio.h>
+#include <stdlib.h>
 extern char *yytext;
 extern FILE *yyin;
 void yyerror(const char * fmt,...);
@@ -126,7 +127,7 @@ typedef int YYSTYPE;
 
 
 /* Line 216 of yacc.c.  */
-#line 130 "fb1.tab.c"
+#line 131 "fb1.tab.c"
 
 #ifdef short
 # undef short
@@ -411,8 +412,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    15,    15,    16,    18,    19,    20,    22,    23,    24,
-      26
+       0,    16,    16,    17,    19,    20,    21,    23,    24,    25,
+      27
 };
 #endif
 
@@ -1316,48 +1317,48 @@ yyreduce:
   switch (yyn)
     {
         case 3:
-#line 16 "fb1.y"
+#line 17 "fb1.y"
     {printf(" = %d\n",(yyvsp[(2) - (3)]));;}
     break;
 
   case 4:
-#line 18 "fb1.y"
+#line 19 "fb1.y"
     {(yyval) =(yyvsp[(1) - (1)]);;}
     break;
 
   case 5:
-#line 19 "fb1.y"
+#line 20 "fb1.y"
     {(yyval) = (yyvsp[(1) - (3)])+(yyvsp[(3) - (3)]);;}
     break;
 
   case 6:
-#line 20 "fb1.y"
+#line 21 "fb1.y"
     {(yyval) = (yyvsp[(1) - (3)])-(yyvsp[(3) - (3)]);;}
     break;
 
   case 7:
-#line 22 "fb1.y"
+#line 23 "fb1.y"
     {(yyval) = (yyvsp[(1) - (1)]);}
     break;
 
   case 8:
-#line 23 "fb1.y"
+#line 24 "fb1.y"
     {(yyval) = (yyvsp[(1) - (3)]) * (yyvsp[(3) - (3)]);;}
     break;
 
   case 9:
-#line 24 "fb1.y"
+#line 25 "fb1.y"
     {(yyval) = (yyvsp[(1) - (3)])/(yyvsp[(3) - (3)]);;}
     break;
 
   case 10:
-#line 26 "fb1.y"
-    {(yyval) = (yyvsp[(1) - (1)]);}
+#line 27 "fb1.y"
+    {(yyval) = (yyvsp[(1) - (1)]);;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1361 "fb1.tab.c"
+#line 1362 "fb1.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1571,7 +1572,7 @@ yyreturn:
 }
 
 
-#line 28 "fb1.y"
+#line 29 "fb1.y"
 
 int main(int argc, char *argv[]){
 	yyin=fopen(argv[1],"r");

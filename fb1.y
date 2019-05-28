@@ -1,5 +1,6 @@
 %{
 #include <stdio.h>
+#include <stdlib.h>
 extern char *yytext;
 extern FILE *yyin;
 void yyerror(const char * fmt,...);
@@ -23,7 +24,7 @@ factor: num  {$$ = $1}
 |factor MUL num {$$ = $1 * $3;}
 |factor DIV num {$$ = $1/$3;}
 ;
-num: NUMBER  {$$ = $1}
+num: NUMBER  {$$ = $1;}
 ;
 %%
 int main(int argc, char *argv[]){

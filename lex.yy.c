@@ -471,8 +471,10 @@ char *yytext;
 #line 1 "fb1.l"
 #line 3 "fb1.l"
     #include "fb1.tab.h"
-#line 474 "lex.yy.c"
-#line 475 "lex.yy.c"
+    // int yylval;
+
+#line 476 "lex.yy.c"
+#line 477 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -689,9 +691,9 @@ YY_DECL
 		}
 
 	{
-#line 6 "fb1.l"
+#line 8 "fb1.l"
 
-#line 694 "lex.yy.c"
+#line 696 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -760,51 +762,51 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 7 "fb1.l"
-{printf("ADD");}
+#line 9 "fb1.l"
+{printf("ADD\n");return ADD;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 8 "fb1.l"
-{printf("SUB\n");}
+#line 10 "fb1.l"
+{printf("SUB\n");return SUB;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 9 "fb1.l"
-{printf("TIMES\n");}
+#line 11 "fb1.l"
+{printf("TIMES\n");return MUL;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 10 "fb1.l"
-{printf("DIVIDE\n");}
+#line 12 "fb1.l"
+{printf("DIVIDE\n");return DIV;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 12 "fb1.l"
-{printf("NUMBER %s\n",yytext);}
+#line 14 "fb1.l"
+{printf("NUMBER %s\n",yytext);yylval = atoi(yytext);return NUMBER;}
 	YY_BREAK
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 13 "fb1.l"
-{ printf("NEWLINE\n");}
+#line 15 "fb1.l"
+{ printf("NEWLINE\n");return EOL;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 14 "fb1.l"
+#line 16 "fb1.l"
 { }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 15 "fb1.l"
+#line 17 "fb1.l"
 { printf("Undifined character %s\n",yytext);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 16 "fb1.l"
+#line 18 "fb1.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 807 "lex.yy.c"
+#line 809 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1821,7 +1823,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 16 "fb1.l"
+#line 18 "fb1.l"
 
 
 // int main(int argc , char ** argv){
