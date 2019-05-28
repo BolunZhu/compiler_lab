@@ -1,25 +1,24 @@
 %option noyywrap nodefault yylineno
 %{
     #include "fb1.tab.h"
+    #define YYSTYPE YYLVAL
+    typedef union{
+    int type_int;
+    double type_double;
+    struct ast * ptr;} YYLVAL;
 %}
 
 %%
-"+" {printf("ADD;}
-"-" {printf("SUB\n");}
-"*" {printf("TIMES\n");}
-"/" {printf("DIVIDE\n");}
-
-[0-9]+ {printf("NUMBER %s\n",yytext);}
-\n { printf("NEWLINE\n");}
+"+" |
+"-" |
+"*" |
+"/" |
+"(" |
+")" {return yytext[0];}
+[0-9]+ { yylval.type_int = atoi(yytext);return INT;}
+([0-9]*\.[0-9]+)|([0-9]+\.) {yylval.type_double = atof(yytext);return DOUBLE;}
+"//".*
 [ \t] { }
+\n {return EOL;}
 . { printf("Undifined character %s\n",yytext);}
 %%
-
-// int main(int argc , char ** argv){
-//     int tok;
-//     while((tok = yylex())){
-//         printf("%d",tok);
-//         if(tok == NUMBER) printf(" = %d\n",yylval);
-//         else printf("\n");
-//     }
-// }

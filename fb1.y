@@ -1,29 +1,41 @@
 %{
 #include <stdio.h>
-extern char *yytext;
-extern FILE *yyin;
-void yyerror(const char * fmt,...);
-int yylex();
+#include <stdlib.h>
+#include "fb1.h"
+// extern char *yytext;
+// extern FILE *yyin;
+// void yyerror(const char * fmt,...);
+// int yylex();
 %}
 
+%union {
+    struct ast *a;
+    double d;
+    int i;
+}
+// ”≈œ»º∂
+%left '+' '-'
+%left '*' '/'
+%right UMINUS
 // declare token
-%token NUMBER
-%token ADD SUB MUL DIV
-%token EOL
 
+%token <d> DOUBLE
+%token <i> INT
+%token EOL
+%type <a> exp
+%type <a> NUMBER
 %%
-exp:
-    |exp result EOL {printf(" = %d\n",$2);}
+exp: exp '+' exp {$$ = newast('+',$1,$3);}
+    |exp '-' exp {$$ = newast('-',$1,$3);}
+    |exp '*' exp {$$ = newast('*',$1,$3);}
+    |exp '/' exp {$$ = newast('/',$1,$3);}
+    |'-' exp %prec UMINUS {$$ = newast('M',$2,NULL);}
+    |NUMBER {$$ = $1;}
+    |exp EOL {//printf(" = %d\n",$1);}
+    }
 ;
-result: factor {$$ =$1;}
-|result ADD factor {$$ = $1+$3;}
-|result SUB factor {$$ = $1-$3;}
-;
-factor: num  {$$ = $1}
-|factor MUL num {$$ = $1 * $3;}
-|factor DIV num {$$ = $1/$3;}
-;
-num: NUMBER  {$$ = $1}
+NUMBER: INT {$$ = newnum($1);}
+    |DOUBLE {$$ = newnum($1);}
 ;
 %%
 int main(int argc, char *argv[]){
