@@ -4,24 +4,30 @@
     // int yylval;
 
 %}
-
+id   [A-Za-z][A-Za-z0-9]*  
+int    "-"?[0-9]+
+double  "-"?([0-9]*\.[0-9]+)|([0-9]+\.)
+char   \'.{1,1}\'
 %%
-"+" {printf("ADD\n");return ADD;}
-"-" {printf("SUB\n");return SUB;}
-"*" {printf("TIMES\n");return MUL;}
-"/" {printf("DIVIDE\n");return DIV;}
+{int}        {printf("INT %s\n",yytext);yylval.i=atoi(yytext); return INT;}
+{double}      {printf("DOUBLE %s\n",yytext);yylval.d=atof(yytext); return DOUBLE;}
+{char} {printf("CHAR %s\n",yytext);yylval.c=yytext[1]; return CHAR;}
+"int"        {strcpy(yylval.id,  yytext);return TYPE;}
+"float"      {strcpy(yylval.id,  yytext);return TYPE;}
+{id}       {strcpy(yylval.id,  yytext); return ID;}
 
-[0-9]+ {printf("NUMBER %s\n",yytext);yylval = atoi(yytext);return NUMBER;}
+">" |
+"<" |
+"==" |
+"!=" |
+"+" |
+"-" |
+"*" |
+"/"  {return yytext[0];}
+">=" {return GEQ;}
+"<=" {return LEQ;}
 \n { printf("NEWLINE\n");return EOL;}
+"//".*
 [ \t] { }
 . { printf("Undifined character %s\n",yytext);}
-%%
-
-// int main(int argc , char ** argv){
-//     int tok;
-//     while((tok = yylex())){
-//         printf("%d",tok);
-//         if(tok == NUMBER) printf(" = %d\n",yylval);
-//         else printf("\n");
-//     }
-// }
+%% 

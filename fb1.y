@@ -1,31 +1,47 @@
 %{
-#include <stdio.h>
-#include <stdlib.h>
-extern char *yytext;
-extern FILE *yyin;
-void yyerror(const char * fmt,...);
-int yylex();
+    #include "fb1.h"
 %}
 
+%union {
+    int i;
+    double d;
+    char c;
+    char id[32];
+}
 // declare token
-%token NUMBER
-%token ADD SUB MUL DIV
+%token <d> DOUBLE
+%token <i> INT
+%token <c> CHAR
+%token <id> ID
+%token <id> TYPE
+%token GEQ LEQ
 %token EOL
-
+%type <d>  exp NUMBER//nonterminal
+%start calclist
+%left '+' '-'
+%left '*' '/'
+%nonassoc  UMINUS
 %%
+calclist:
+|calclist exp EOL {printf(" = %f\n",$2);}
+|TYPE ID {}
 exp:
-    |exp result EOL {printf(" = %d\n",$2);}
+exp '+' exp {$$ = $1+$3;}
+|exp '-' exp {$$ = $1-$3;}
+|exp '*' exp {$$ = $1 * $3;}
+|exp '/' exp  {$$ = $1/$3;}
+|exp GEQ exp
+|exp LEQ exp
+|exp '>' exp {$$ = $1>$3;}
+|exp '<' exp
+|exp '==' exp
+|exp '!=' exp
+|'-' exp %prec UMINUS {$$=-$2;}
+|NUMBER {$$ = $1;}
 ;
-result: factor {$$ =$1;}
-|result ADD factor {$$ = $1+$3;}
-|result SUB factor {$$ = $1-$3;}
-;
-factor: num  {$$ = $1}
-|factor MUL num {$$ = $1 * $3;}
-|factor DIV num {$$ = $1/$3;}
-;
-num: NUMBER  {$$ = $1;}
-;
+NUMBER: INT {$$ = $1;}
+|DOUBLE {$$ = $1;}
+|CHAR {$$ = $1;}
 %%
 int main(int argc, char *argv[]){
 	yyin=fopen(argv[1],"r");
