@@ -4,7 +4,7 @@
 %}
 
 %%
-"+" {printf("ADD;}
+"+" {printf("ADD");}
 "-" {printf("SUB\n");}
 "*" {printf("TIMES\n");}
 "/" {printf("DIVIDE\n");}
