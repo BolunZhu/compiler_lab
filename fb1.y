@@ -14,10 +14,11 @@
 %token <c> CHAR
 %token <id> ID
 %token <id> TYPE
-%token GEQ LEQ
+%token GEQ LEQ EQ NEQ
 %token EOL
 %type <d>  exp NUMBER//nonterminal
 %start calclist
+%left LEQ GEQ EQ NEQ '>' '<'
 %left '+' '-'
 %left '*' '/'
 %nonassoc  UMINUS
@@ -30,12 +31,12 @@ exp '+' exp {$$ = $1+$3;}
 |exp '-' exp {$$ = $1-$3;}
 |exp '*' exp {$$ = $1 * $3;}
 |exp '/' exp  {$$ = $1/$3;}
-|exp GEQ exp
-|exp LEQ exp
+|exp GEQ exp{$$=$1>=$3;}
+|exp LEQ exp{$$=$1<=$3;}
 |exp '>' exp {$$ = $1>$3;}
-|exp '<' exp
-|exp '==' exp
-|exp '!=' exp
+|exp '<' exp {$$ = $1<$3;}
+|exp EQ exp {$$=$1==$3;}
+|exp NEQ exp {$$=$1!=$3;}
 |'-' exp %prec UMINUS {$$=-$2;}
 |NUMBER {$$ = $1;}
 ;

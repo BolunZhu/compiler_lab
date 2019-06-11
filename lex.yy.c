@@ -1,5 +1,5 @@
 
-#line 2 "lex.yy.c"
+#line 3 "lex.yy.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -384,9 +384,9 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[42] =
     {   0,
-        0,    0,   22,   20,   19,   17,   20,   20,   13,   11,
-       12,   20,   14,    1,    8,   20,    7,    6,    6,    6,
-       10,    0,    0,    1,    2,   18,    2,    1,   16,    9,
+        0,    0,   22,   20,   19,   17,   20,   20,   11,    9,
+       10,   20,   12,    1,    8,   20,    7,    6,    6,    6,
+       14,    0,    0,    1,    2,   18,    2,    1,   16,   13,
        15,    6,    6,    6,    3,   18,    6,    4,    6,    5,
         0
     } ;
@@ -497,8 +497,8 @@ char *yytext;
     #include "fb1.tab.h"
     // int yylval;
 
-#line 500 "lex.yy.c"
 #line 501 "lex.yy.c"
+#line 502 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -717,7 +717,7 @@ YY_DECL
 	{
 #line 11 "fb1.l"
 
-#line 720 "lex.yy.c"
+#line 721 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -825,13 +825,19 @@ case 10:
 case 11:
 #line 24 "fb1.l"
 case 12:
-#line 25 "fb1.l"
+YY_RULE_SETUP
+#line 24 "fb1.l"
+{return yytext[0];}
+	YY_BREAK
 case 13:
-#line 26 "fb1.l"
+YY_RULE_SETUP
+#line 25 "fb1.l"
+{return EQ;}
+	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 26 "fb1.l"
-{return yytext[0];}
+{return NEQ;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
@@ -869,7 +875,7 @@ YY_RULE_SETUP
 #line 33 "fb1.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 872 "lex.yy.c"
+#line 879 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

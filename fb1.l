@@ -18,12 +18,12 @@ char   \'.{1,1}\'
 
 ">" |
 "<" |
-"==" |
-"!=" |
 "+" |
 "-" |
 "*" |
 "/"  {return yytext[0];}
+"==" {return EQ;}
+"!=" {return NEQ;}
 ">=" {return GEQ;}
 "<=" {return LEQ;}
 \n { printf("NEWLINE\n");return EOL;}
